@@ -125,13 +125,13 @@ To Do
 -----
 
 - Add automated tests for all exception classes.
-- Provide integration examples for common web frameworks (e.g., Flask, FastAPI).
+- Provide integration examples for common web frameworks (e.g., Flask, FastAPI, Falcon).
 - Document advanced usage of extensions for custom problem details.
 
 Bugs
 ----
 
-- No known issues yet—report any on GitHub!
+- No known issues.
 
 .. |pypi| image:: https://img.shields.io/pypi/v/hcli_problem_details?label=hcli_problem_details
    :target: https://pypi.org/project/hcli_problem_details
