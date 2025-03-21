@@ -3,11 +3,11 @@
 hcli_problem_details
 ====================
 
-A Python library providing RFC 9457 compliant problem detail exceptions for HCLI applications and other Python projects.
+A Python library providing RFC 9457-compliant problem detail exceptions for HCLI applications and beyond.
 
 ----
 
-This package delivers a complete set of HTTP problem detail exceptions adhering to RFC 9457 (Problem Details for HTTP APIs). Built as part of the HCLI ecosystem, it offers reusable exception classes for HTTP 4xx and 5xx status codes, simplifying standardized error handling in HCLI applications and other Python projects. Each exception can be transformed into an RFC 9457 compliant problem detail dictionary for consistent API error responses.
+This package delivers a complete set of HTTP problem detail exceptions adhering to RFC 9457 (Problem Details for HTTP APIs). Built as part of the HCLI ecosystem, it offers reusable exception classes for HTTP 4xx and 5xx status codes, simplifying standardized error handling in HCLI applications and other Python projects. Each exception can be transformed into an RFC 9457-compliant problem detail object for consistent API error responses.
 
 Learn more about HCLI at hcli.io [1].
 
@@ -37,7 +37,7 @@ hcli_problem_details requires a supported version of Python and pip.
 Usage
 -----
 
-Import and raise exceptions in your Python application as needed. Each exception generates an RFC 9457 compliant problem detail representation.
+Import and raise exceptions in your Python application as needed. Each exception generates an RFC 9457-compliant problem detail representation.
 
 .. code-block:: python
 
@@ -56,6 +56,59 @@ Integration with HCLI Core
 
 HCLI Core utilizes this package to automatically recognize and relay its raised exceptions to HCLI clients (e.g., huckle) as problem details.
 
+Available Errors
+----------------
+
+The following exception classes are available, each corresponding to an HTTP status code and RFC 9457 problem detail:
+
+**4xx Client Errors:**
+
+- ``BadRequestError`` (400) - Bad Request
+- ``AuthenticationError`` (401) - Unauthorized
+- ``PaymentRequiredError`` (402) - Payment Required
+- ``AuthorizationError`` (403) - Forbidden
+- ``NotFoundError`` (404) - Not Found
+- ``MethodNotAllowedError`` (405) - Method Not Allowed
+- ``NotAcceptableError`` (406) - Not Acceptable
+- ``ProxyAuthenticationError`` (407) - Proxy Authentication Required
+- ``RequestTimeoutError`` (408) - Request Timeout
+- ``ConflictError`` (409) - Conflict
+- ``GoneError`` (410) - Gone
+- ``LengthRequiredError`` (411) - Length Required
+- ``PreconditionFailedError`` (412) - Precondition Failed
+- ``PayloadTooLargeError`` (413) - Payload Too Large
+- ``URITooLongError`` (414) - URI Too Long
+- ``UnsupportedMediaTypeError`` (415) - Unsupported Media Type
+- ``RangeNotSatisfiableError`` (416) - Range Not Satisfiable
+- ``ExpectationFailedError`` (417) - Expectation Failed
+- ``TeapotError`` (418) - I'm a teapot
+- ``MisdirectedRequestError`` (421) - Misdirected Request
+- ``UnprocessableEntityError`` (422) - Unprocessable Entity
+- ``LockedError`` (423) - Locked
+- ``FailedDependencyError`` (424) - Failed Dependency
+- ``TooEarlyError`` (425) - Too Early
+- ``UpgradeRequiredError`` (426) - Upgrade Required
+- ``PreconditionRequiredError`` (428) - Precondition Required
+- ``TooManyRequestsError`` (429) - Too Many Requests
+- ``RequestHeaderFieldsTooLargeError`` (431) - Request Header Fields Too Large
+- ``UnavailableForLegalReasonsError`` (451) - Unavailable For Legal Reasons
+
+**5xx Server Errors:**
+
+- ``InternalServerError`` (500) - Internal Server Error
+- ``NotImplementedError`` (501) - Not Implemented
+- ``BadGatewayError`` (502) - Bad Gateway
+- ``ServiceUnavailableError`` (503) - Service Unavailable
+- ``GatewayTimeoutError`` (504) - Gateway Timeout
+- ``HTTPVersionNotSupportedError`` (505) - HTTP Version Not Supported
+- ``VariantAlsoNegotiatesError`` (506) - Variant Also Negotiates
+- ``InsufficientStorageError`` (507) - Insufficient Storage
+- ``LoopDetectedError`` (508) - Loop Detected
+- ``NotExtendedError`` (510) - Not Extended
+- ``NetworkAuthenticationRequiredError`` (511) - Network Authentication Required
+
+All exceptions inherit from ``ProblemDetail`` and support optional ``detail``, ``instance``, and ``extensions`` parameters.
+
 Versioning
 ----------
 
@@ -65,20 +118,20 @@ Supports
 --------
 
 - Full coverage of HTTP 4xx client errors and 5xx server errors as exception classes.
-- RFC 9457 problem detail structure with `type`, `title`, `status`, `detail`, `instance`, and extensible `extensions`.
+- RFC 9457 problem detail structure with ``type``, ``title``, ``status``, ``detail``, ``instance``, and extensible ``extensions``.
 - Compatibility with HCLI Core and any Python project requiring standardized HTTP error handling.
 
 To Do
 -----
 
 - Add automated tests for all exception classes.
-- Provide integration examples for common web frameworks (e.g., Flask, FastAPI, Falcon).
+- Provide integration examples for common web frameworks (e.g., Flask, FastAPI).
 - Document advanced usage of extensions for custom problem details.
 
 Bugs
 ----
 
-- No known issues.
+- No known issues yet—report any on GitHub!
 
 .. |pypi| image:: https://img.shields.io/pypi/v/hcli_problem_details?label=hcli_problem_details
    :target: https://pypi.org/project/hcli_problem_details
