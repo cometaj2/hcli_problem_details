@@ -47,7 +47,7 @@ if sys.argv[-1] == 'publish':
 
 if sys.argv[-1] == 'tag':
     branch = subprocess.check_output('git rev-parse --abbrev-ref HEAD', shell=True).strip()
-    if branch != "master":
+    if branch != b'master':
         sys.exit("tagging from a branch other than master is disallowed.")
     os.system("git tag -a %s -m 'version %s'" % ("hcli_problem_details-" + version, "hcli_problem_details-" + version))
     sys.exit()
