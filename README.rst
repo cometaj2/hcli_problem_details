@@ -3,11 +3,11 @@
 hcli_problem_details
 ====================
 
-A Python library providing RFC 9457-compliant problem detail exceptions for HCLI applications and other Python projects.
+A Python library providing RFC 9457 compliant problem detail exceptions for HCLI applications and other Python projects.
 
 ----
 
-This package delivers a complete set of HTTP problem detail exceptions adhering to RFC 9457 (Problem Details for HTTP APIs). Built as part of the HCLI ecosystem, it offers reusable exception classes for HTTP 4xx and 5xx status codes, simplifying standardized error handling in HCLI applications and other Python projects. Each exception can be transformed into an RFC 9457-compliant problem detail object for consistent API error responses.
+This package delivers a complete set of HTTP problem detail exceptions adhering to RFC 9457 (Problem Details for HTTP APIs). Built as part of the HCLI ecosystem, it offers reusable exception classes for HTTP 4xx and 5xx status codes, simplifying standardized error handling in HCLI applications and other Python projects. Each exception can be transformed into an RFC 9457 compliant problem detail dictionary for consistent API error responses.
 
 Learn more about HCLI at hcli.io [1].
 
@@ -36,7 +36,7 @@ hcli_problem_details requires a supported version of Python and pip.
 Usage
 -----
 
-Import and raise exceptions in your Python application as needed. Each exception generates an RFC 9457-compliant problem detail representation.
+Import and raise exceptions in your Python application as needed. Each exception generates an RFC 9457 compliant problem detail representation.
 
 .. code-block:: python
 
@@ -71,7 +71,7 @@ To Do
 -----
 
 - Add automated tests for all exception classes.
-- Provide integration examples for common web frameworks (e.g., Flask, FastAPI).
+- Provide integration examples for common web frameworks (e.g., Flask, FastAPI, Falcon).
 - Document advanced usage of extensions for custom problem details.
 
 Bugs
