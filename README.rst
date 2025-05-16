@@ -107,7 +107,7 @@ The following exception classes are available, each corresponding to an HTTP sta
 - ``NotExtendedError`` (510) - Not Extended
 - ``NetworkAuthenticationRequiredError`` (511) - Network Authentication Required
 
-All exceptions inherit from ``ProblemDetail`` and support optional ``detail``, ``instance``, and ``extensions`` parameters.
+All exceptions inherit from ``ProblemDetail`` and support optional ``detail``, ``instance``, ``type_uri``, and ``extensions`` parameters.
 
 Versioning
 ----------
@@ -118,7 +118,7 @@ Supports
 --------
 
 - Full coverage of HTTP 4xx client errors and 5xx server errors as exception classes.
-- RFC 9457 problem detail structure with ``type``, ``title``, ``status``, ``detail``, ``instance``, and extensible ``extensions``.
+- RFC 9457 problem detail structure with ``type``, ``title``, ``status``, ``detail``, ``instance``, ``type_uri``, and extensible ``extensions``.
 - Compatibility with HCLI Core and any Python project requiring standardized HTTP error handling.
 
 To Do

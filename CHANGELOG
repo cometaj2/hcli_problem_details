@@ -4,9 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is loosely based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.2]
+- Fix support for type_uri override and for extensions
+- Update README to cover type_uri
+
 ## [0.1.1]
 - Add all available errors in the README documentation
 
 ## [0.1.0]
 - RFC 9457 compliant problem detail errors for use in 3rd party HCLI applications
-
