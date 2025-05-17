@@ -23,6 +23,27 @@ class ProblemDetail(Exception):
         problem_detail.update(self.extensions)
         return problem_detail
 
+    # Create a ProblemDetail instance for the given HTTP status code.
+    #
+    # Args:
+    #     status_code (int): The HTTP status code.
+    #     detail (str, optional): A human-readable explanation of the error.
+    #     instance (str, optional): A URI identifying the specific occurrence of the problem.
+    #     type_uri (str, optional): A URI identifying the problem type.
+    #     extensions (dict, optional): Additional problem detail fields.
+    #
+    # Returns:
+    #     ProblemDetail: An instance of the appropriate ProblemDetail subclass.
+    @classmethod
+    def from_status_code(cls, status_code, detail=None, instance=None, type_uri=None, extensions=None):
+        return ProblemDetailRegistry.from_status_code(
+            status_code=status_code,
+            detail=detail,
+            instance=instance,
+            type_uri=type_uri,
+            extensions=extensions
+        )
+
 # 4xx Client Errors
 class BadRequestError(ProblemDetail):
     def __init__(self, detail=None, instance=None, type_uri=None, extensions=None):
@@ -464,3 +485,83 @@ class NetworkAuthenticationRequiredError(ProblemDetail):
             instance=instance,
             extensions=extensions
         )
+
+# Registry to map status codes to ProblemDetail subclasses
+class ProblemDetailRegistry:
+    _status_to_class = {
+        400: BadRequestError,
+        401: AuthenticationError,
+        402: PaymentRequiredError,
+        403: AuthorizationError,
+        404: NotFoundError,
+        405: MethodNotAllowedError,
+        406: NotAcceptableError,
+        407: ProxyAuthenticationError,
+        408: RequestTimeoutError,
+        409: ConflictError,
+        410: GoneError,
+        411: LengthRequiredError,
+        412: PreconditionFailedError,
+        413: PayloadTooLargeError,
+        414: URITooLongError,
+        415: UnsupportedMediaTypeError,
+        416: RangeNotSatisfiableError,
+        417: ExpectationFailedError,
+        418: TeapotError,
+        421: MisdirectedRequestError,
+        422: UnprocessableEntityError,
+        423: LockedError,
+        424: FailedDependencyError,
+        425: TooEarlyError,
+        426: UpgradeRequiredError,
+        428: PreconditionRequiredError,
+        429: TooManyRequestsError,
+        431: RequestHeaderFieldsTooLargeError,
+        451: UnavailableForLegalReasonsError,
+        500: InternalServerError,
+        501: NotImplementedError,
+        502: BadGatewayError,
+        503: ServiceUnavailableError,
+        504: GatewayTimeoutError,
+        505: HTTPVersionNotSupportedError,
+        506: VariantAlsoNegotiatesError,
+        507: InsufficientStorageError,
+        508: LoopDetectedError,
+        510: NotExtendedError,
+        511: NetworkAuthenticationRequiredError,
+    }
+
+    # Create a ProblemDetail instance for the given HTTP status code.
+    #
+    # Args:
+    #     status_code (int): The HTTP status code.
+    #     detail (str, optional): A human-readable explanation of the error.
+    #     instance (str, optional): A URI identifying the specific occurrence of the problem.
+    #     type_uri (str, optional): A URI identifying the problem type.
+    #     extensions (dict, optional): Additional problem detail fields.
+    #
+    # Returns:
+    #     ProblemDetail: An instance of the appropriate ProblemDetail subclass.
+    #
+    # Raises:
+    #     ValueError: If the status code is not mapped to a ProblemDetail subclass.
+    @classmethod
+    def from_status_code(cls, status_code, detail=None, instance=None, type_uri=None, extensions=None):
+        problem_class = cls._status_to_class.get(status_code)
+        if not problem_class:
+            # Fallback to generic ProblemDetail with a default title
+            return ProblemDetail(
+                title=f"HTTP Status {status_code}",
+                status=status_code,
+                detail=detail,
+                type_uri=type_uri,
+                instance=instance,
+                extensions=extensions
+            )
+        return problem_class(
+            detail=detail,
+            instance=instance,
+            type_uri=type_uri,
+            extensions=extensions
+        )
+
